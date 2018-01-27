@@ -12,5 +12,54 @@ import stanford.karel.*;
 public class CheckerboardKarel extends SuperKarel {
 
 	// You fill in this part
+	public void run() {
+		turnLeft();
+		for ( int i = 1 ; i < 65 ; i++ ) {
+			goStrange();
+			int k = ( i + 2 ) % 2  ;
+			if ( k == 1 ) {
+				if (noBeepersPresent()) {
+					putBeeper();
+				}
+			}
+			
+		}
+		
+	}
+	
+	public void goStrange() {
+		if (frontIsClear()) {
+			move();
+		} else {
+			turnBack();
+		}
+	}
+	public void turnBack() {
+		if (frontIsBlocked()) {
+			if (facingNorth()) {
+				turnRight();
+				if (frontIsClear()) {
+					move();
+					turnRight();
+				}
+			}
+			else if (facingSouth()) {
+				turnLeft();
+				if (frontIsClear()) {
+					move();
+					turnLeft();
+				}
+			}
+		}
+	}
+	public void turnRight() {
+		turnLeft();
+		turnLeft();
+		turnLeft();
+	}
+	public void turnAround() {
+		turnLeft();
+		turnLeft();
+	}
 
 }
